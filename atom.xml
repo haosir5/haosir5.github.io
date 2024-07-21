@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>豪先生博客</title>
+  
+  
+  <link href="https://haosir5.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://haosir5.github.io/"/>
+  <updated>2024-04-02T20:57:03.353Z</updated>
+  <id>https://haosir5.github.io/</id>
+  
+  <author>
+    <name>豪先生</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>若依框架新用户登录</title>
+    <link href="https://haosir5.github.io/2024/04/03/ruo-yi-kuang-jia-xin-yong-hu-deng-lu/"/>
+    <id>https://haosir5.github.io/2024/04/03/ruo-yi-kuang-jia-xin-yong-hu-deng-lu/</id>
+    <published>2024-04-02T20:48:26.000Z</published>
+    <updated>2024-04-02T20:57:03.353Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;若依-v3-8-6前后端分离版：添加新用户表添加新登录接口，用于小程序或者APP获取token，并使用若依的验证方法&quot;&gt;&lt;a href=&quot;#若依-v3-8-6前后端分离版：添加新用户表添加新登录接口，用于小程序或者APP获取token，并使用若依的验证方法&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="RuoYi" scheme="https://haosir5.github.io/%E6%A0%87%E7%AD%BE/RuoYi/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spring+JPA+Maven创建项目</title>
+    <link href="https://haosir5.github.io/2023/09/25/spring-jpa-maven-chuang-jian-xiang-mu/"/>
+    <id>https://haosir5.github.io/2023/09/25/spring-jpa-maven-chuang-jian-xiang-mu/</id>
+    <published>2023-09-25T05:39:29.000Z</published>
+    <updated>2023-09-25T14:01:52.674Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;这里记录我学习spring的步骤&lt;/p&gt;
+&lt;p&gt; 先到 &lt;a href=&quot;https://start.spring.io/&quot;&gt;Spring Initializr&lt;/a&gt; 网站，创建一个初始化项目。配置大概如下&lt;img</summary>
+        
+      
+    
+    
+    
+    
+    <category term="Java" scheme="https://haosir5.github.io/%E6%A0%87%E7%AD%BE/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Vue打包的项目部署服务器之后，其他路由刷新页面时显示404</title>
+    <link href="https://haosir5.github.io/2023/07/28/vue-da-bao-de-xiang-mu-bu-shu-fu-wu-qi-zhi-hou-qi-ta-lu-you-shua-xin-ye-mian-shi-xian-shi-404/"/>
+    <id>https://haosir5.github.io/2023/07/28/vue-da-bao-de-xiang-mu-bu-shu-fu-wu-qi-zhi-hou-qi-ta-lu-you-shua-xin-ye-mian-shi-xian-shi-404/</id>
+    <published>2023-07-28T06:39:11.000Z</published>
+    <updated>2023-07-28T06:41:14.972Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;解决方法&quot;&gt;&lt;a href=&quot;#解决方法&quot; class=&quot;headerlink&quot; title=&quot;解决方法&quot;&gt;&lt;/a&gt;解决方法&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;在Vue框架中解决404&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;vue router mode</summary>
+        
+      
+    
+    
+    
+    
+    <category term="Vue" scheme="https://haosir5.github.io/%E6%A0%87%E7%AD%BE/Vue/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>wordpress静态化页面发布到gitee pages</title>
+    <link href="https://haosir5.github.io/2023/07/28/wordpress-jing-tai-hua-ye-mian-fa-bu-dao-gitee-pages/"/>
+    <id>https://haosir5.github.io/2023/07/28/wordpress-jing-tai-hua-ye-mian-fa-bu-dao-gitee-pages/</id>
+    <published>2023-07-28T06:38:18.000Z</published>
+    <updated>2023-07-28T06:38:44.365Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;我们要在&lt;a href=&quot;https://so.csdn.net/so/search?q=wordpress&amp;amp;spm=1001.2101.3001.7020&quot;&gt;wordpress&lt;/a&gt;里面下载一个插件，完成静态化，这里选择Simply</summary>
+        
+      
+    
+    
+    
+    
+    <category term="WordPress" scheme="https://haosir5.github.io/%E6%A0%87%E7%AD%BE/WordPress/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Vue禁止键盘使用ctrl+功能</title>
+    <link href="https://haosir5.github.io/2023/07/28/vue-jin-zhi-jian-pan-shi-yong-ctrl-gong-neng/"/>
+    <id>https://haosir5.github.io/2023/07/28/vue-jin-zhi-jian-pan-shi-yong-ctrl-gong-neng/</id>
+    <published>2023-07-28T06:37:17.000Z</published>
+    <updated>2023-07-28T06:37:59.019Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;在全局或者固定页面禁止使用（ctrl+R这个是tauri刷新页面功能）或者ctrl+?功能&lt;/p&gt;
+&lt;p&gt;在&lt;a</summary>
+        
+      
+    
+    
+    
+    
+    <category term="Vue" scheme="https://haosir5.github.io/%E6%A0%87%E7%AD%BE/Vue/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Tauri 窗口页面透明（类似歌词）</title>
+    <link href="https://haosir5.github.io/2023/07/28/tauri-chuang-kou-ye-mian-tou-ming-lei-si-ge-ci/"/>
+    <id>https://haosir5.github.io/2023/07/28/tauri-chuang-kou-ye-mian-tou-ming-lei-si-ge-ci/</id>
+    <published>2023-07-28T06:36:17.000Z</published>
+    <updated>2023-07-28T06:36:56.605Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt; 没有透明之前 &lt;/p&gt;
+&lt;p&gt; &lt;img</summary>
+        
+      
+    
+    
+    
+    
+    <category term="Tauri" scheme="https://haosir5.github.io/%E6%A0%87%E7%AD%BE/Tauri/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Tauri 前端使用重新运行应用程序api</title>
+    <link href="https://haosir5.github.io/2023/07/28/tauri-qian-duan-shi-yong-chong-xin-yun-xing-ying-yong-cheng-xu-api/"/>
+    <id>https://haosir5.github.io/2023/07/28/tauri-qian-duan-shi-yong-chong-xin-yun-xing-ying-yong-cheng-xu-api/</id>
+    <published>2023-07-28T06:34:54.000Z</published>
+    <updated>2023-07-28T06:36:36.926Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;&lt;a href=&quot;https://tauri.app/v1/api/js/process/#relaunch&quot;&gt;process | Tauri Apps&lt;/a&gt; 这里面有调用重新运行应用程序的&lt;a</summary>
+        
+      
+    
+    
+    
+    
+    <category term="Tauri" scheme="https://haosir5.github.io/%E6%A0%87%E7%AD%BE/Tauri/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Tauri网易云扫描二维码登录</title>
+    <link href="https://haosir5.github.io/2023/07/28/tauri-wang-yi-yun-sao-miao-er-wei-ma-deng-lu/"/>
+    <id>https://haosir5.github.io/2023/07/28/tauri-wang-yi-yun-sao-miao-er-wei-ma-deng-lu/</id>
+    <published>2023-07-28T06:31:37.000Z</published>
+    <updated>2023-07-28T06:33:46.915Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt; 先上页面代码 &lt;/p&gt;
+&lt;pre class=&quot;line-numbers language-vue&quot; data-language=&quot;vue&quot;&gt;&lt;code class=&quot;language-vue&quot;&gt;&amp;lt;template&amp;gt;
+  &amp;lt;div</summary>
+        
+      
+    
+    
+    
+    
+    <category term="Tauri" scheme="https://haosir5.github.io/%E6%A0%87%E7%AD%BE/Tauri/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vue项目部署到Gitee Pages,接口出现403处理</title>
+    <link href="https://haosir5.github.io/2023/07/28/vue-xiang-mu-bu-shu-dao-gitee-pages-jie-kou-chu-xian-403-chu-li/"/>
+    <id>https://haosir5.github.io/2023/07/28/vue-xiang-mu-bu-shu-dao-gitee-pages-jie-kou-chu-xian-403-chu-li/</id>
+    <published>2023-07-28T06:28:07.000Z</published>
+    <updated>2023-07-28T06:31:12.258Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;使用&lt;a href=&quot;https://so.csdn.net/so/search?q=vuecli&amp;amp;spm=1001.2101.3001.7020&quot;&gt;vuecli&lt;/a&gt;创建项目之后，目录大概如下&lt;/p&gt;
+&lt;p&gt;&lt;img</summary>
+        
+      
+    
+    
+    
+    
+    <category term="GiteePages" scheme="https://haosir5.github.io/%E6%A0%87%E7%AD%BE/GiteePages/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Tauri 应用篇 - 系统托盘</title>
+    <link href="https://haosir5.github.io/2023/07/28/tauri-ying-yong-pian-xi-tong-tuo-pan/"/>
+    <id>https://haosir5.github.io/2023/07/28/tauri-ying-yong-pian-xi-tong-tuo-pan/</id>
+    <published>2023-07-28T06:15:52.000Z</published>
+    <updated>2023-07-28T06:28:15.712Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;基本配置&quot;&gt;&lt;a href=&quot;#基本配置&quot; class=&quot;headerlink&quot; title=&quot;基本配置&quot;&gt;&lt;/a&gt;基本配置&lt;/h2&gt;&lt;p&gt;编辑</summary>
+        
+      
+    
+    
+    
+    
+    <category term="Tauri" scheme="https://haosir5.github.io/%E6%A0%87%E7%AD%BE/Tauri/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vue3封装-自定义audio音频播放【拖拽进度条,点击进度条，快进，后退】思路</title>
+    <link href="https://haosir5.github.io/2023/07/28/vue3-feng-zhuang-zi-ding-yi-audio-yin-pin-bo-fang-tuo-zhuai-jin-du-tiao-dian-ji-jin-du-tiao-kuai-jin-hou-tui-si-lu/"/>
+    <id>https://haosir5.github.io/2023/07/28/vue3-feng-zhuang-zi-ding-yi-audio-yin-pin-bo-fang-tuo-zhuai-jin-du-tiao-dian-ji-jin-du-tiao-kuai-jin-hou-tui-si-lu/</id>
+    <published>2023-07-28T06:13:02.000Z</published>
+    <updated>2023-07-28T06:17:24.966Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;1.根据业务需求反应，及网上阅读资料，代码缺斤少两，本文复制粘贴即可使用，但注意引用了第三库的&lt;a</summary>
+        
+      
+    
+    
+    
+    
+    <category term="Tauri" scheme="https://haosir5.github.io/%E6%A0%87%E7%AD%BE/Tauri/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Tauri+Element-plus loading组件</title>
+    <link href="https://haosir5.github.io/2023/07/28/tauri-element-plus-loading-zu-jian/"/>
+    <id>https://haosir5.github.io/2023/07/28/tauri-element-plus-loading-zu-jian/</id>
+    <published>2023-07-28T06:08:10.000Z</published>
+    <updated>2023-07-28T06:08:57.500Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;pre class=&quot;line-numbers language-vue&quot; data-language=&quot;vue&quot;&gt;&lt;code class=&quot;language-vue&quot;&gt;&amp;lt;template&amp;gt;
+  &amp;lt;el-table</summary>
+        
+      
+    
+    
+    
+    
+    <category term="Tauri" scheme="https://haosir5.github.io/%E6%A0%87%E7%AD%BE/Tauri/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Tauri+Element-plus修改组件样式（局部样式和全局样式）</title>
+    <link href="https://haosir5.github.io/2023/07/28/tauri-element-plus-xiu-gai-zu-jian-yang-shi-ju-bu-yang-shi-he-quan-ju-yang-shi/"/>
+    <id>https://haosir5.github.io/2023/07/28/tauri-element-plus-xiu-gai-zu-jian-yang-shi-ju-bu-yang-shi-he-quan-ju-yang-shi/</id>
+    <published>2023-07-28T06:05:28.000Z</published>
+    <updated>2023-07-28T06:07:36.357Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt; 在&lt;a href=&quot;https://so.csdn.net/so/search?q=Vue2&amp;amp;spm=1001.2101.3001.7020&quot;&gt;Vue2&lt;/a&gt;.x版本中，我修改element-ui组件样式用的是  &amp;gt;&amp;gt;&amp;gt; 来修改</summary>
+        
+      
+    
+    
+    
+    
+    <category term="Tauri" scheme="https://haosir5.github.io/%E6%A0%87%E7%AD%BE/Tauri/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Tauri+Vue3路由获取和跳转</title>
+    <link href="https://haosir5.github.io/2023/07/28/tauri-vue3-lu-you-huo-qu-he-tiao-zhuan/"/>
+    <id>https://haosir5.github.io/2023/07/28/tauri-vue3-lu-you-huo-qu-he-tiao-zhuan/</id>
+    <published>2023-07-28T06:03:19.000Z</published>
+    <updated>2023-07-28T06:06:08.682Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;1、在要使用到路由的页面引入下面代码&lt;/p&gt;
+&lt;pre class=&quot;line-numbers language-vue&quot; data-language=&quot;vue&quot;&gt;&lt;code class=&quot;language-vue&quot;&gt;&amp;lt;template&amp;gt;
+   </summary>
+        
+      
+    
+    
+    
+    
+    <category term="Tauri" scheme="https://haosir5.github.io/%E6%A0%87%E7%AD%BE/Tauri/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Tauri 打开新窗口</title>
+    <link href="https://haosir5.github.io/2022/10/29/tauri-da-kai-xin-chuang-kou/"/>
+    <id>https://haosir5.github.io/2022/10/29/tauri-da-kai-xin-chuang-kou/</id>
+    <published>2022-10-28T17:00:59.000Z</published>
+    <updated>2023-07-28T06:42:13.323Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1、第一种方法（不推荐）&quot;&gt;&lt;a href=&quot;#1、第一种方法（不推荐）&quot; class=&quot;headerlink&quot; title=&quot;1、第一种方法（不推荐）&quot;&gt;&lt;/a&gt;1、第一种方法（不推荐）&lt;/h2&gt;&lt;h2</summary>
+        
+      
+    
+    
+    
+    
+    <category term="Tauri" scheme="https://haosir5.github.io/%E6%A0%87%E7%AD%BE/Tauri/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Tauri 打包</title>
+    <link href="https://haosir5.github.io/2022/10/29/tauri-da-bao/"/>
+    <id>https://haosir5.github.io/2022/10/29/tauri-da-bao/</id>
+    <published>2022-10-28T16:13:25.000Z</published>
+    <updated>2023-01-04T07:54:24.691Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1、第一次打包运行命令&quot;&gt;&lt;a href=&quot;#1、第一次打包运行命令&quot; class=&quot;headerlink&quot; title=&quot;1、第一次打包运行命令&quot;&gt;&lt;/a&gt;1、第一次打包运行命令&lt;/h2&gt;&lt;pre class=&quot;line-numbers</summary>
+        
+      
+    
+    
+    
+    
+    <category term="Tauri build" scheme="https://haosir5.github.io/%E6%A0%87%E7%AD%BE/Tauri-build/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Tauri 系统托盘图标</title>
+    <link href="https://haosir5.github.io/2022/10/29/tauri-xi-tong-tuo-pan-tu-biao/"/>
+    <id>https://haosir5.github.io/2022/10/29/tauri-xi-tong-tuo-pan-tu-biao/</id>
+    <published>2022-10-28T16:05:13.000Z</published>
+    <updated>2022-11-03T14:51:32.330Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1、在src-tauri目录下找到src目录里面的main-rs&quot;&gt;&lt;a href=&quot;#1、在src-tauri目录下找到src目录里面的main-rs&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="Tauri" scheme="https://haosir5.github.io/%E6%A0%87%E7%AD%BE/Tauri/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Tauri 处理post、get接口</title>
+    <link href="https://haosir5.github.io/2022/10/28/tauri-chu-li-post-get-jie-kou/"/>
+    <id>https://haosir5.github.io/2022/10/28/tauri-chu-li-post-get-jie-kou/</id>
+    <published>2022-10-28T12:31:41.000Z</published>
+    <updated>2022-10-28T12:42:09.957Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;本文源地址： &lt;a href=&quot;https://www.jianshu.com/p/b3397fd711d2&quot;&gt;TAURI的http请求调用示例 - 简书 (jianshu.com)&lt;/a&gt; &lt;/p&gt;
+&lt;h3</summary>
+        
+      
+    
+    
+    
+    
+    <category term="Tauri post、get请求" scheme="https://haosir5.github.io/%E6%A0%87%E7%AD%BE/Tauri-post%E3%80%81get%E8%AF%B7%E6%B1%82/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Tauri 引入element-plus</title>
+    <link href="https://haosir5.github.io/2022/10/28/tauri-yin-ru-element-plus/"/>
+    <id>https://haosir5.github.io/2022/10/28/tauri-yin-ru-element-plus/</id>
+    <published>2022-10-28T12:02:45.000Z</published>
+    <updated>2022-11-03T14:52:51.458Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1、安装element-plus&quot;&gt;&lt;a href=&quot;#1、安装element-plus&quot; class=&quot;headerlink&quot; title=&quot;1、安装element-plus&quot;&gt;&lt;/a&gt;1、安装element-plus&lt;/h2&gt;&lt;pre</summary>
+        
+      
+    
+    
+    
+    
+    <category term="Tauri Element-plus Vue3 Vite" scheme="https://haosir5.github.io/%E6%A0%87%E7%AD%BE/Tauri-Element-plus-Vue3-Vite/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Tauri+Vite+Vue3创建项目步骤</title>
+    <link href="https://haosir5.github.io/2022/10/26/tauri-vite-vue3-chuang-jian-xiang-mu-bu-zou/"/>
+    <id>https://haosir5.github.io/2022/10/26/tauri-vite-vue3-chuang-jian-xiang-mu-bu-zou/</id>
+    <published>2022-10-26T07:07:55.000Z</published>
+    <updated>2022-11-03T14:35:44.802Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1、按照官网文档创建tauri项目&quot;&gt;&lt;a href=&quot;#1、按照官网文档创建tauri项目&quot; class=&quot;headerlink&quot; title=&quot;1、按照官网文档创建tauri项目&quot;&gt;&lt;/a&gt;1、按照官网文档创建tauri项目&lt;/h2&gt;&lt;pre</summary>
+        
+      
+    
+    
+    
+    
+    <category term="Tauri" scheme="https://haosir5.github.io/%E6%A0%87%E7%AD%BE/Tauri/"/>
+    
+  </entry>
+  
+</feed>

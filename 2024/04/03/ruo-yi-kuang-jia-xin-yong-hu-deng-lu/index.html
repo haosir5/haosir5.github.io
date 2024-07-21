@@ -1,0 +1,2568 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="若依框架新用户登录, 豪先生博客">
+    <meta name="description" content="若依@v3.8.6前后端分离版：添加新用户表添加新登录接口，用于小程序或者APP获取token，并使用若依的验证方法1、创建一个前端APP用户表：app_user表，并插入一条数据
+DROP TABLE IF EXISTS app_user">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- 百度 -->
+    <meta name="baidu-site-verification" content="code-WqYbOWrXhR" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', '');
+</script>
+
+
+    <title>若依框架新用户登录 | 豪先生博客</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="豪先生博客" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+       background-repeat:no-repeat;
+       background-size: 100% 100%;
+       background-attachment:fixed;
+    }
+</style>
+
+
+<body>
+    <header class="navbar-fixed">
+    <!-- <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
+
+
+    <script>
+        $(document).pjax('a[target!=_blank]', '.content', { fragment: '.content', timeout: 8000 });
+    </script> -->
+   
+    <!-- 百度 -->
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?cffde243ca789d13e6ee85701fe67d30";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+    <!-- 在线客服 -->
+    <script src="//code.tidio.co/eflt5ckpmhuyasnyrgjmyjtscfop7ckr.js" async></script>
+    <!--看板娘-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css" />
+    <script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget/autoload.js"></script>
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <img style="border-radius: 100%;" src="/medias/logo.png" class="logo-img" alt="LOGO">
+                        
+                            <span class="logo-span">
+                                豪先生博客
+                            </span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">豪先生博客</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/haosir5/haosir5.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/haosir5/haosir5.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+                
+    </nav>
+
+</header>
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://tvax2.sinaimg.cn/large/006D2oSpgy1h1ojlofdftj30m808cmzi.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">若依框架新用户登录</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/%E6%A0%87%E7%AD%BE/RuoYi/">
+                                <span class="chip bg-color">RuoYi</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2024-04-03
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2024-04-03
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    3.8k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    20 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="若依-v3-8-6前后端分离版：添加新用户表添加新登录接口，用于小程序或者APP获取token，并使用若依的验证方法"><a href="#若依-v3-8-6前后端分离版：添加新用户表添加新登录接口，用于小程序或者APP获取token，并使用若依的验证方法" class="headerlink" title="若依@v3.8.6前后端分离版：添加新用户表添加新登录接口，用于小程序或者APP获取token，并使用若依的验证方法"></a>若依@v3.8.6前后端分离版：添加新用户表添加新登录接口，用于小程序或者APP获取token，并使用若依的验证方法</h1><p>1、创建一个前端APP用户表：app_user表，并插入一条数据</p>
+<p>DROP TABLE IF EXISTS <code>app_user</code>;</p>
+<p>CREATE TABLE <code>app_user</code> (<br>  <code>user_id</code> bigint NOT NULL AUTO_INCREMENT COMMENT ‘用户ID’,<br>  <code>user_name</code> varchar(30) NOT NULL COMMENT ‘用户账号’,<br>  <code>nick_name</code> varchar(30) NOT NULL COMMENT ‘用户昵称’,<br>  <code>email</code> varchar(50) DEFAULT ‘’ COMMENT ‘用户邮箱’,<br>  <code>mobile</code> varchar(11) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT ‘’ COMMENT ‘手机号码’,<br>  <code>sex</code> char(1) DEFAULT ‘0’ COMMENT ‘用户性别（0男 1女 2未知）’,<br>  <code>avatar</code> varchar(100) DEFAULT ‘’ COMMENT ‘头像地址’,<br>  <code>password</code> varchar(100) DEFAULT ‘’ COMMENT ‘密码’,<br>  <code>salt</code> varchar(50) DEFAULT ‘’ COMMENT ‘盐’,<br>  <code>status</code> char(1) DEFAULT ‘0’ COMMENT ‘帐号状态（0正常 1停用）’,<br>  <code>del_flag</code> char(1) DEFAULT ‘0’ COMMENT ‘删除标志（0代表存在 2代表删除）’,<br>  <code>login_ip</code> varchar(128) DEFAULT ‘’ COMMENT ‘最后登录IP’,<br>  <code>login_date</code> datetime DEFAULT NULL COMMENT ‘最后登录时间’,<br>  <code>create_by</code> varchar(64) DEFAULT ‘’ COMMENT ‘创建者’,<br>  <code>create_time</code> datetime DEFAULT NULL COMMENT ‘创建时间’,<br>  <code>update_by</code> varchar(64) DEFAULT ‘’ COMMENT ‘更新者’,<br>  <code>update_time</code> datetime DEFAULT NULL COMMENT ‘更新时间’,<br>  <code>remark</code> varchar(500) DEFAULT NULL COMMENT ‘备注’,<br>  PRIMARY KEY (<code>user_id</code>)<br>) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT=’用户信息表’;</p>
+<p>/*Data for the table <code>app_user</code> */</p>
+<p>insert  into <code>app_user</code>(<code>user_id</code>,<code>user_name</code>,<code>nick_name</code>,<code>email</code>,<code>mobile</code>,<code>sex</code>,<code>avatar</code>,<code>password</code>,<code>salt</code>,<code>status</code>,<code>del_flag</code>,<code>login_ip</code>,<code>login_date</code>,<code>create_by</code>,<code>create_time</code>,<code>update_by</code>,<code>update_time</code>,<code>remark</code>) values (1,’qiaochu666’,’翘楚’,‘<a href="mailto:123456@163.com">123456@163.com</a>‘,’18866778899’,’1’,’’,’bb6d30fe528388b8f08631afb5a22c5c’,’GoEskKGp’,’0’,’0’,’192.168.3.4’,’2023-10-28 21:48:46’,’管理员’,’2023-10-28 21:24:06’,’管理员’,’2023-10-28 21:48:46’,’测试账号’);<br>2、创建 AppUser 实体类</p>
+<p>package com.ruoyi.common.core.domain.entity;</p>
+<p>import com.ruoyi.common.core.domain.BaseEntity;</p>
+<p>import java.util.Date;</p>
+<p>/**</p>
+<ul>
+<li><p>用户对象 app_user</p>
+</li>
+<li></li>
+<li><p>@author ruoyi</p>
+</li>
+<li><p>/<br>public class AppUser extends BaseEntity {</p>
+<p>  private static final long serialVersionUID = 1L;</p>
+<p>  /**</p>
+<ul>
+<li>用户ID</li>
+<li>/<br>private Long userId;</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>用户账号</li>
+<li>/<br>private String userName;</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>用户昵称</li>
+<li>/<br>private String nickName;</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>用户邮箱</li>
+<li>/<br>private String email;</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>手机号码</li>
+<li>/<br>private String mobile;</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>用户性别（0=男,1=女,2=未知）</li>
+<li>/<br>private String sex;</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>用户头像</li>
+<li>/<br>private String avatar;</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>密码</li>
+<li>/<br>private String password;</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>盐</li>
+<li>/<br>private String salt;</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>帐号状态（0=正常,1=停用）</li>
+<li>/<br>private String status;</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>删除标志（0代表存在 2代表删除）</li>
+<li>/<br>private String delFlag;</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>最后登录IP</li>
+<li>/<br>private String loginIp;</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>最后登录时间</li>
+<li>/<br>private Date loginDate;</li>
+</ul>
+<p>  public Long getUserId() {</p>
+<pre><code>  return userId;
+</code></pre>
+<p>  }</p>
+<p>  public void setUserId(Long userId) {</p>
+<pre><code>  this.userId = userId;
+</code></pre>
+<p>  }</p>
+<p>  public String getUserName() {</p>
+<pre><code>  return userName;
+</code></pre>
+<p>  }</p>
+<p>  public void setUserName(String userName) {</p>
+<pre><code>  this.userName = userName;
+</code></pre>
+<p>  }</p>
+<p>  public String getNickName() {</p>
+<pre><code>  return nickName;
+</code></pre>
+<p>  }</p>
+<p>  public void setNickName(String nickName) {</p>
+<pre><code>  this.nickName = nickName;
+</code></pre>
+<p>  }</p>
+<p>  public String getEmail() {</p>
+<pre><code>  return email;
+</code></pre>
+<p>  }</p>
+<p>  public void setEmail(String email) {</p>
+<pre><code>  this.email = email;
+</code></pre>
+<p>  }</p>
+<p>  public String getMobile() {</p>
+<pre><code>  return mobile;
+</code></pre>
+<p>  }</p>
+<p>  public void setMobile(String mobile) {</p>
+<pre><code>  this.mobile = mobile;
+</code></pre>
+<p>  }</p>
+<p>  public String getSex() {</p>
+<pre><code>  return sex;
+</code></pre>
+<p>  }</p>
+<p>  public void setSex(String sex) {</p>
+<pre><code>  this.sex = sex;
+</code></pre>
+<p>  }</p>
+<p>  public String getAvatar() {</p>
+<pre><code>  return avatar;
+</code></pre>
+<p>  }</p>
+<p>  public void setAvatar(String avatar) {</p>
+<pre><code>  this.avatar = avatar;
+</code></pre>
+<p>  }</p>
+<p>  public String getPassword() {</p>
+<pre><code>  return password;
+</code></pre>
+<p>  }</p>
+<p>  public void setPassword(String password) {</p>
+<pre><code>  this.password = password;
+</code></pre>
+<p>  }</p>
+<p>  public String getSalt() {</p>
+<pre><code>  return salt;
+</code></pre>
+<p>  }</p>
+<p>  public void setSalt(String salt) {</p>
+<pre><code>  this.salt = salt;
+</code></pre>
+<p>  }</p>
+<p>  public String getStatus() {</p>
+<pre><code>  return status;
+</code></pre>
+<p>  }</p>
+<p>  public void setStatus(String status) {</p>
+<pre><code>  this.status = status;
+</code></pre>
+<p>  }</p>
+<p>  public String getDelFlag() {</p>
+<pre><code>  return delFlag;
+</code></pre>
+<p>  }</p>
+<p>  public void setDelFlag(String delFlag) {</p>
+<pre><code>  this.delFlag = delFlag;
+</code></pre>
+<p>  }</p>
+<p>  public String getLoginIp() {</p>
+<pre><code>  return loginIp;
+</code></pre>
+<p>  }</p>
+<p>  public void setLoginIp(String loginIp) {</p>
+<pre><code>  this.loginIp = loginIp;
+</code></pre>
+<p>  }</p>
+<p>  public Date getLoginDate() {</p>
+<pre><code>  return loginDate;
+</code></pre>
+<p>  }</p>
+<p>  public void setLoginDate(Date loginDate) {</p>
+<pre><code>  this.loginDate = loginDate;
+</code></pre>
+<p>  }<br>}<br>目录：ruoyi-common——&gt;src——&gt;main——&gt;java——&gt;com.ruoyi.common——&gt;core——&gt;domian——&gt;entity</p>
+</li>
+</ul>
+<p>注意：与 SysUser 同级目录</p>
+<p><img src="/../%E8%8B%A5%E4%BE%9D%E6%A1%86%E6%9E%B6%E6%96%B0%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/1712090975543.png"></p>
+<p>3、创建 AppUserMapper.xml 映射文件</p>
+<!--?xml version="1.0" encoding="UTF-8" ?-->
+
+<mapper namespace="com.ruoyi.system.mapper.AppUserMapper">
+
+<pre><code>&lt;resultMap type="AppUser" id="AppUserResult"&gt;
+    &lt;id property="userId" column="user_id"/&gt;
+    &lt;result property="userName" column="user_name"/&gt;
+    &lt;result property="nickName" column="nick_name"/&gt;
+    &lt;result property="email" column="email"/&gt;
+    &lt;result property="mobile" column="mobile"/&gt;
+    &lt;result property="sex" column="sex"/&gt;
+    &lt;result property="avatar" column="avatar"/&gt;
+    &lt;result property="password" column="password"/&gt;
+    &lt;result property="salt" column="salt"/&gt;
+    &lt;result property="status" column="status"/&gt;
+    &lt;result property="delFlag" column="del_flag"/&gt;
+    &lt;result property="loginIp" column="login_ip"/&gt;
+    &lt;result property="loginDate" column="login_date"/&gt;
+    &lt;result property="createBy" column="create_by"/&gt;
+    &lt;result property="createTime" column="create_time"/&gt;
+    &lt;result property="updateBy" column="update_by"/&gt;
+    &lt;result property="updateTime" column="update_time"/&gt;
+    &lt;result property="remark" column="remark"/&gt;
+&lt;/resultMap&gt;
+ 
+&lt;sql id="selectAppUserVo"&gt;
+    select user_id, user_name, nick_name, email, avatar, mobile, password, salt, sex, status, del_flag, login_ip, login_date, create_by, create_time, remark from app_user
+&lt;/sql&gt;
+ 
+&lt;select id="selectAppUserByUserName" parameterType="String" resultMap="AppUserResult"&gt;
+    &lt;include refid="selectAppUserVo"/&gt;
+    where user_name = #{userName} and del_flag = '0'
+&lt;/select&gt;
+ 
+&lt;update id="updateAppUser" parameterType="AppUser"&gt;
+    update app_user
+    &lt;set&gt;
+        &lt;if test="userName != null and userName != ''"&gt;user_name = #{userName},&lt;/if&gt;
+        &lt;if test="nickName != null and nickName != ''"&gt;nick_name = #{nickName},&lt;/if&gt;
+        &lt;if test="email != null "&gt;email = #{email},&lt;/if&gt;
+        &lt;if test="mobile != null "&gt;mobile = #{mobile},&lt;/if&gt;
+        &lt;if test="sex != null and sex != ''"&gt;sex = #{sex},&lt;/if&gt;
+        &lt;if test="avatar != null and avatar != ''"&gt;avatar = #{avatar},&lt;/if&gt;
+        &lt;if test="password != null and password != ''"&gt;password = #{password},&lt;/if&gt;
+        &lt;if test="salt != null and salt != ''"&gt;salt = #{salt},&lt;/if&gt;
+        &lt;if test="status != null and status != ''"&gt;status = #{status},&lt;/if&gt;
+        &lt;if test="loginIp != null and loginIp != ''"&gt;login_ip = #{loginIp},&lt;/if&gt;
+        &lt;if test="loginDate != null"&gt;login_date = #{loginDate},&lt;/if&gt;
+        &lt;if test="updateBy != null and updateBy != ''"&gt;update_by = #{updateBy},&lt;/if&gt;
+        &lt;if test="remark != null"&gt;remark = #{remark},&lt;/if&gt;
+        update_time = sysdate()
+    &lt;/set&gt;
+    where user_id = #{userId}
+&lt;/update&gt;
+</code></pre>
+</mapper> 
+目录：ruoyi-system——&gt;src——&gt;main——&gt;resources——&gt;mapper.system
+
+<p>注意：与 SysUserMapper.xml 同级目录<br><img src="/../%E8%8B%A5%E4%BE%9D%E6%A1%86%E6%9E%B6%E6%96%B0%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/1712091002369.png"></p>
+<p>4、创建 AppUserMapper 数据层</p>
+<p>package com.ruoyi.system.mapper;</p>
+<p>import com.ruoyi.common.core.domain.entity.AppUser;</p>
+<p>/**</p>
+<ul>
+<li><p>用户表 数据层</p>
+</li>
+<li></li>
+<li><p>@author ruoyi</p>
+</li>
+<li><p>/<br>public interface AppUserMapper {<br>  /**</p>
+<ul>
+<li>通过用户名查询用户</li>
+<li></li>
+<li>@param userName 用户名</li>
+<li>@return 用户对象信息</li>
+<li>/<br>AppUser selectAppUserByUserName(String userName);</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>修改用户信息</li>
+<li></li>
+<li>@param appUser 用户信息</li>
+<li>@return 结果</li>
+<li>/<br>int updateAppUser(AppUser appUser);<br>}<br>目录：ruoyi-system——&gt;src——&gt;main——&gt;java——&gt;com.ruoyi.system——&gt;mapper </li>
+</ul>
+</li>
+</ul>
+<p>注意：与 SysUserMapper 同级目录<br><img src="/../%E8%8B%A5%E4%BE%9D%E6%A1%86%E6%9E%B6%E6%96%B0%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/1712091028058.png"></p>
+<p>5、创建 IAppUserService 业务层</p>
+<p>package com.ruoyi.system.service;</p>
+<p>import com.ruoyi.common.core.domain.entity.AppUser;</p>
+<p>/**</p>
+<ul>
+<li><p>用户 业务层</p>
+</li>
+<li></li>
+<li><p>@author ruoyi</p>
+</li>
+<li><p>/<br>public interface IAppUserService {<br>  /**</p>
+<ul>
+<li>通过用户账号查询用户</li>
+<li></li>
+<li>@param userName 用户账号</li>
+<li>@return 用户对象信息</li>
+<li>/<br>AppUser selectAppUserByUserName(String userName);</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>修改用户信息</li>
+<li></li>
+<li>@param appUser 用户信息</li>
+<li>@return 结果</li>
+<li>/<br>int updateAppUser(AppUser appUser);</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>密码校验</li>
+<li></li>
+<li>@param password 明文</li>
+<li>@param salt     盐</li>
+<li>@param hashPwd  密文</li>
+<li>@return boolean</li>
+<li>/<br>boolean checkPassword(String password, String salt, String hashPwd);<br>}<br>目录：ruoyi-system——&gt;src——&gt;main——&gt;java——&gt;com.ruoyi.system——&gt;service</li>
+</ul>
+</li>
+</ul>
+<p>注意：与 ISysUserService 同级目录<br><img src="/../%E8%8B%A5%E4%BE%9D%E6%A1%86%E6%9E%B6%E6%96%B0%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/1712091049663.png"></p>
+<p>6、创建 AppUserServiceImpl 业务实现层</p>
+<p>package com.ruoyi.system.service.impl;</p>
+<p>import com.ruoyi.common.core.domain.entity.AppUser;<br>import com.ruoyi.system.mapper.AppUserMapper;<br>import com.ruoyi.system.service.IAppUserService;<br>import org.apache.commons.lang3.RandomStringUtils;<br>import org.springframework.stereotype.Service;<br>import org.springframework.util.DigestUtils;</p>
+<p>import javax.annotation.Resource;</p>
+<p>/**</p>
+<ul>
+<li><p>用户 业务层处理</p>
+</li>
+<li></li>
+<li><p>@author ruoyi</p>
+</li>
+<li><p>/<br>@Service<br>public class AppUserServiceImpl implements IAppUserService {<br>  @Resource<br>  private AppUserMapper appUserMapper;</p>
+<p>  /**</p>
+<ul>
+<li>通过用户名查询用户</li>
+<li></li>
+<li>@param userName 用户名</li>
+<li>@return 用户对象信息</li>
+<li>/<br>@Override<br>public AppUser selectAppUserByUserName(String userName) {<br>  return appUserMapper.selectAppUserByUserName(userName);<br>}</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>修改保存用户信息</li>
+<li></li>
+<li>@param appUser 用户信息</li>
+<li>@return 结果</li>
+<li>/<br>@Override<br>public int updateAppUser(AppUser appUser) {<br>  return appUserMapper.updateAppUser(appUser);<br>}</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>密码校验</li>
+<li></li>
+<li>@param password 明文</li>
+<li>@param salt     盐</li>
+<li>@param hashPwd  密文</li>
+<li>@return boolean</li>
+<li>/<br>public boolean checkPassword(String password, String salt, String hashPwd) {<br>  return hashPwd.equals(DigestUtils.md5DigestAsHex(password.concat(salt).getBytes()));<br>}</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>随即生成盐</li>
+<li>8位随机数</li>
+<li></li>
+<li>@return salt 盐</li>
+<li>/<br>private String generateSalt() {<br>  return RandomStringUtils.randomAlphanumeric(8);<br>}</li>
+</ul>
+<p>  public static void main(String[] args) {</p>
+<pre><code>  AppUserServiceImpl appUserService = new AppUserServiceImpl();
+  String password = "123456";
+  String salt = appUserService.generateSalt();
+  System.out.printf("明文密码：%s%n", password);
+  System.out.printf("盐：%s%n", salt);
+  System.out.printf("密文密码：%s%n", DigestUtils.md5DigestAsHex(password.concat(salt).getBytes()));
+</code></pre>
+<p>  }<br>}<br>目录：ruoyi-system——&gt;src——&gt;main——&gt;java——&gt;com.ruoyi.system——&gt;service——&gt;impl</p>
+</li>
+</ul>
+<p>注意：与 SysUserServiceImpl 同级目录</p>
+<p><img src="/../%E8%8B%A5%E4%BE%9D%E6%A1%86%E6%9E%B6%E6%96%B0%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/1712091068162.png"></p>
+<p>7、创建 LoginAppUser 登录用户身份权限类</p>
+<p>package com.ruoyi.common.core.domain.model;</p>
+<p>import com.alibaba.fastjson2.annotation.JSONField;<br>import com.ruoyi.common.core.domain.entity.AppUser;<br>import org.springframework.security.core.GrantedAuthority;<br>import org.springframework.security.core.userdetails.UserDetails;</p>
+<p>import java.util.Collection;</p>
+<p>/**</p>
+<ul>
+<li><p>登录用户身份权限</p>
+</li>
+<li></li>
+<li><p>@author ruoyi</p>
+</li>
+<li><p>/<br>public class LoginAppUser implements UserDetails {<br>  private static final long serialVersionUID = 1L;</p>
+<p>  /**</p>
+<ul>
+<li>用户ID</li>
+<li>/<br>private Long userId;</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>用户唯一标识</li>
+<li>/<br>private String token;</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>登录时间</li>
+<li>/<br>private Long loginTime;</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>过期时间</li>
+<li>/<br>private Long expireTime;</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>登录IP地址</li>
+<li>/<br>private String ipaddr;</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>登录地点</li>
+<li>/<br>private String loginLocation;</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>浏览器类型</li>
+<li>/<br>private String browser;</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>操作系统</li>
+<li>/<br>private String os;</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>用户信息</li>
+<li>/<br>private AppUser appUser;</li>
+</ul>
+<p>  public LoginAppUser() {<br>  }</p>
+<p>  public LoginAppUser(AppUser appUser) {</p>
+<pre><code>  this.appUser = appUser;
+</code></pre>
+<p>  }</p>
+<p>  public LoginAppUser(Long userId, AppUser appUser) {</p>
+<pre><code>  this.userId = userId;
+  this.appUser = appUser;
+</code></pre>
+<p>  }</p>
+<p>  public Long getUserId() {</p>
+<pre><code>  return userId;
+</code></pre>
+<p>  }</p>
+<p>  public void setUserId(Long userId) {</p>
+<pre><code>  this.userId = userId;
+</code></pre>
+<p>  }</p>
+<p>  public String getToken() {</p>
+<pre><code>  return token;
+</code></pre>
+<p>  }</p>
+<p>  public void setToken(String token) {</p>
+<pre><code>  this.token = token;
+</code></pre>
+<p>  }</p>
+<p>  @JSONField(serialize = false)<br>  @Override<br>  public String getPassword() {</p>
+<pre><code>  return appUser.getPassword();
+</code></pre>
+<p>  }</p>
+<p>  @Override<br>  public String getUsername() {</p>
+<pre><code>  return appUser.getUserName();
+</code></pre>
+<p>  }</p>
+<p>  /**</p>
+<ul>
+<li>账户是否未过期,过期无法验证</li>
+<li>/<br>@JSONField(serialize = false)<br>@Override<br>public boolean isAccountNonExpired() {<br>  return true;<br>}</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>指定用户是否解锁,锁定的用户无法进行身份验证</li>
+<li></li>
+<li>@return</li>
+<li>/<br>@JSONField(serialize = false)<br>@Override<br>public boolean isAccountNonLocked() {<br>  return true;<br>}</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>指示是否已过期的用户的凭据(密码),过期的凭据防止认证</li>
+<li></li>
+<li>@return</li>
+<li>/<br>@JSONField(serialize = false)<br>@Override<br>public boolean isCredentialsNonExpired() {<br>  return true;<br>}</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>是否可用 ,禁用的用户不能身份验证</li>
+<li></li>
+<li>@return</li>
+<li>/<br>@JSONField(serialize = false)<br>@Override<br>public boolean isEnabled() {<br>  return true;<br>}</li>
+</ul>
+<p>  public Long getLoginTime() {</p>
+<pre><code>  return loginTime;
+</code></pre>
+<p>  }</p>
+<p>  public void setLoginTime(Long loginTime) {</p>
+<pre><code>  this.loginTime = loginTime;
+</code></pre>
+<p>  }</p>
+<p>  public String getIpaddr() {</p>
+<pre><code>  return ipaddr;
+</code></pre>
+<p>  }</p>
+<p>  public void setIpaddr(String ipaddr) {</p>
+<pre><code>  this.ipaddr = ipaddr;
+</code></pre>
+<p>  }</p>
+<p>  public String getLoginLocation() {</p>
+<pre><code>  return loginLocation;
+</code></pre>
+<p>  }</p>
+<p>  public void setLoginLocation(String loginLocation) {</p>
+<pre><code>  this.loginLocation = loginLocation;
+</code></pre>
+<p>  }</p>
+<p>  public String getBrowser() {</p>
+<pre><code>  return browser;
+</code></pre>
+<p>  }</p>
+<p>  public void setBrowser(String browser) {</p>
+<pre><code>  this.browser = browser;
+</code></pre>
+<p>  }</p>
+<p>  public String getOs() {</p>
+<pre><code>  return os;
+</code></pre>
+<p>  }</p>
+<p>  public void setOs(String os) {</p>
+<pre><code>  this.os = os;
+</code></pre>
+<p>  }</p>
+<p>  public Long getExpireTime() {</p>
+<pre><code>  return expireTime;
+</code></pre>
+<p>  }</p>
+<p>  public void setExpireTime(Long expireTime) {</p>
+<pre><code>  this.expireTime = expireTime;
+</code></pre>
+<p>  }</p>
+<p>  public AppUser getAppUser() {</p>
+<pre><code>  return appUser;
+</code></pre>
+<p>  }</p>
+<p>  public void setAppUser(AppUser appUser) {</p>
+<pre><code>  this.appUser = appUser;
+</code></pre>
+<p>  }</p>
+<p>  @Override<br>  public Collection&lt;? extends GrantedAuthority&gt; getAuthorities() {</p>
+<pre><code>  return null;
+</code></pre>
+<p>  }<br>}<br>目录：ruoyi-common——&gt;src——&gt;main——&gt;java——&gt;com.ruoyi.common——&gt;core——&gt;domian——&gt;model</p>
+</li>
+</ul>
+<p>注意：与 LoginUser 同级目录</p>
+<p>8、创建 LoginAppBody 用户登录对象类</p>
+<p>package com.ruoyi.common.core.domain.model;</p>
+<p>/**</p>
+<ul>
+<li><p>用户登录对象</p>
+</li>
+<li></li>
+<li><p>@author ruoyi</p>
+</li>
+<li><p>/<br>public class LoginAppBody<br>{<br>  /**</p>
+<ul>
+<li>用户名</li>
+<li>/<br>private String username;</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>用户密码</li>
+<li>/<br>private String password;</li>
+</ul>
+<p>  public String getUsername()<br>  {</p>
+<pre><code>  return username;
+</code></pre>
+<p>  }</p>
+<p>  public void setUsername(String username)<br>  {</p>
+<pre><code>  this.username = username;
+</code></pre>
+<p>  }</p>
+<p>  public String getPassword()<br>  {</p>
+<pre><code>  return password;
+</code></pre>
+<p>  }</p>
+<p>  public void setPassword(String password)<br>  {</p>
+<pre><code>  this.password = password;
+</code></pre>
+<p>  }<br>}<br>目录：ruoyi-common——&gt;src——&gt;main——&gt;java——&gt;com.ruoyi.common——&gt;core——&gt;domian——&gt;model</p>
+</li>
+</ul>
+<p>注意：与 LoginBody 同级目录<br><img src="/../%E8%8B%A5%E4%BE%9D%E6%A1%86%E6%9E%B6%E6%96%B0%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/1712091092209.png"></p>
+<p>9、通用常量信息 Constants 添加常量信息</p>
+<p>添加：</p>
+<pre><code>/**
+ * APP令牌前缀
+ */
+public static final String LOGIN_APP_USER_KEY = "login_app_user_key";
+/**
+ * APP接口前缀
+ */
+public static final String APP_URI = "/app/";
+</code></pre>
+<p><img src="/../%E8%8B%A5%E4%BE%9D%E6%A1%86%E6%9E%B6%E6%96%B0%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/1712091115097.png"></p>
+<p> 目录：ruoyi-common——&gt;src——&gt;main——&gt;java——&gt;com.ruoyi.common——&gt;constant  </p>
+<p><img src="/../%E8%8B%A5%E4%BE%9D%E6%A1%86%E6%9E%B6%E6%96%B0%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/1712091140957.png"></p>
+<p>10、创建 AppTokenService TOKEN处理类</p>
+<p>package com.ruoyi.framework.web.service;</p>
+<p>import com.ruoyi.common.constant.CacheConstants;<br>import com.ruoyi.common.constant.Constants;<br>import com.ruoyi.common.core.domain.model.LoginAppUser;<br>import com.ruoyi.common.core.redis.RedisCache;<br>import com.ruoyi.common.utils.ServletUtils;<br>import com.ruoyi.common.utils.StringUtils;<br>import com.ruoyi.common.utils.ip.AddressUtils;<br>import com.ruoyi.common.utils.ip.IpUtils;<br>import com.ruoyi.common.utils.uuid.IdUtils;<br>import eu.bitwalker.useragentutils.UserAgent;<br>import io.jsonwebtoken.Claims;<br>import io.jsonwebtoken.Jwts;<br>import io.jsonwebtoken.SignatureAlgorithm;<br>import org.springframework.beans.factory.annotation.Value;<br>import org.springframework.stereotype.Component;</p>
+<p>import javax.annotation.Resource;<br>import javax.servlet.http.HttpServletRequest;<br>import java.util.HashMap;<br>import java.util.Map;<br>import java.util.concurrent.TimeUnit;</p>
+<p>/**</p>
+<ul>
+<li><p>token验证处理</p>
+</li>
+<li></li>
+<li><p>@author ruoyi</p>
+</li>
+<li><p>/<br>@Component<br>public class AppTokenService {<br>  // 令牌自定义标识<br>  @Value(“${token.header}”)<br>  private String header;</p>
+<p>  // 令牌秘钥<br>  @Value(“${token.secret}”)<br>  private String secret;</p>
+<p>  // 令牌有效期（默认30分钟）<br>  @Value(“${token.expireTime}”)<br>  private int expireTime;</p>
+<p>  protected static final long MILLIS_SECOND = 1000;</p>
+<p>  protected static final long MILLIS_MINUTE = 60 * MILLIS_SECOND;</p>
+<p>  private static final Long MILLIS_MINUTE_TEN = 20 * 60 * 1000L;</p>
+<p>  @Resource<br>  private RedisCache redisCache;</p>
+<p>  /**</p>
+<ul>
+<li>获取用户身份信息</li>
+<li></li>
+<li>@return 用户信息</li>
+<li>/<br>public LoginAppUser getLoginAppUser(HttpServletRequest request) {<br>  // 获取请求携带的令牌<br>  String token = getToken(request);<br>  if (StringUtils.isNotEmpty(token)) {<pre><code>  try {
+      Claims claims = parseToken(token);
+      // 解析对应的权限以及用户信息
+      String uuid = (String) claims.get(Constants.LOGIN_APP_USER_KEY);
+      String userKey = getTokenKey(uuid);
+      LoginAppUser loginAppUser = redisCache.getCacheObject(userKey);
+      return loginAppUser;
+  } catch (Exception e) {
+  }
+</code></pre>
+  }<br>  return null;<br>}</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>设置用户身份信息</li>
+<li>/<br>public void setLoginAppUser(LoginAppUser loginAppUser) {<br>  if (StringUtils.isNotNull(loginAppUser) &amp;&amp; StringUtils.isNotEmpty(loginAppUser.getToken())) {<pre><code>  refreshToken(loginAppUser);
+</code></pre>
+  }<br>}</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>删除用户身份信息</li>
+<li>/<br>public void delLoginAppUser(String token) {<br>  if (StringUtils.isNotEmpty(token)) {<pre><code>  String userKey = getTokenKey(token);
+  redisCache.deleteObject(userKey);
+</code></pre>
+  }<br>}</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li><p>创建令牌</p>
+</li>
+<li></li>
+<li><p>@param loginAppUser 用户信息</p>
+</li>
+<li><p>@return 令牌</p>
+</li>
+<li><p>/<br>public String createAppToken(LoginAppUser loginAppUser) {<br>  String token = IdUtils.fastUUID();<br>  loginAppUser.setToken(token);<br>  setUserAgent(loginAppUser);<br>  refreshToken(loginAppUser);</p>
+<p>  Map&lt;String, Object&gt; claims = new HashMap&lt;&gt;();<br>  claims.put(Constants.LOGIN_APP_USER_KEY, token);<br>  return createToken(claims);<br>}</p>
+</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>验证令牌有效期，相差不足20分钟，自动刷新缓存</li>
+<li></li>
+<li>@param loginAppUser</li>
+<li>@return 令牌</li>
+<li>/<br>public void verifyToken(LoginAppUser loginAppUser) {<br>  long expireTime = loginAppUser.getExpireTime();<br>  long currentTime = System.currentTimeMillis();<br>  if (expireTime - currentTime &lt;= MILLIS_MINUTE_TEN) {<pre><code>  refreshToken(loginAppUser);
+</code></pre>
+  }<br>}</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>刷新令牌有效期</li>
+<li></li>
+<li>@param loginAppUser 登录信息</li>
+<li>/<br>public void refreshToken(LoginAppUser loginAppUser) {<br>  loginAppUser.setLoginTime(System.currentTimeMillis());<br>  loginAppUser.setExpireTime(loginAppUser.getLoginTime() + expireTime * MILLIS_MINUTE);<br>  // 根据uuid将loginUser缓存<br>  String userKey = getTokenKey(loginAppUser.getToken());<br>  redisCache.setCacheObject(userKey, loginAppUser, expireTime, TimeUnit.MINUTES);<br>}</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>设置用户代理信息</li>
+<li></li>
+<li>@param loginAppUser 登录信息</li>
+<li>/<br>public void setUserAgent(LoginAppUser loginAppUser) {<br>  UserAgent userAgent = UserAgent.parseUserAgentString(ServletUtils.getRequest().getHeader(“User-Agent”));<br>  String ip = IpUtils.getIpAddr();<br>  loginAppUser.setIpaddr(ip);<br>  loginAppUser.setLoginLocation(AddressUtils.getRealAddressByIP(ip));<br>  loginAppUser.setBrowser(userAgent.getBrowser().getName());<br>  loginAppUser.setOs(userAgent.getOperatingSystem().getName());<br>}</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>从数据声明生成令牌</li>
+<li></li>
+<li>@param claims 数据声明</li>
+<li>@return 令牌</li>
+<li>/<br>private String createToken(Map&lt;String, Object&gt; claims) {<br>  String token = Jwts.builder()<pre><code>      .setClaims(claims)
+      .signWith(SignatureAlgorithm.HS512, secret).compact();
+</code></pre>
+  return token;<br>}</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>从令牌中获取数据声明</li>
+<li></li>
+<li>@param token 令牌</li>
+<li>@return 数据声明</li>
+<li>/<br>private Claims parseToken(String token) {<br>  return Jwts.parser()<pre><code>      .setSigningKey(secret)
+      .parseClaimsJws(token)
+      .getBody();
+</code></pre>
+}</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>从令牌中获取用户名</li>
+<li></li>
+<li>@param token 令牌</li>
+<li>@return 用户名</li>
+<li>/<br>public String getUsernameFromToken(String token) {<br>  Claims claims = parseToken(token);<br>  return claims.getSubject();<br>}</li>
+</ul>
+<p>  /**</p>
+<ul>
+<li>获取请求token</li>
+<li></li>
+<li>@param request</li>
+<li>@return token</li>
+<li>/<br>private String getToken(HttpServletRequest request) {<br>  String token = request.getHeader(header);<br>  if (StringUtils.isNotEmpty(token) &amp;&amp; token.startsWith(Constants.TOKEN_PREFIX)) {<pre><code>  token = token.replace(Constants.TOKEN_PREFIX, "");
+</code></pre>
+  }<br>  return token;<br>}</li>
+</ul>
+<p>  private String getTokenKey(String uuid) {</p>
+<pre><code>  return CacheConstants.LOGIN_APP_TOKEN_KEY + uuid;
+</code></pre>
+<p>  }<br>}<br>目录：ruoyi-framework——&gt;src——&gt;main——&gt;java——&gt;com.ruoyi.framework——&gt;web——&gt;service</p>
+</li>
+</ul>
+<p>注意：与 TokenService 同级目录</p>
+<p>11、创建 AppLoginService 登录校验方法类</p>
+<p>package com.ruoyi.framework.web.service;</p>
+<p>import com.ruoyi.common.core.domain.entity.AppUser;<br>import com.ruoyi.common.core.domain.model.LoginAppUser;<br>import com.ruoyi.common.exception.ServiceException;<br>import com.ruoyi.common.utils.DateUtils;<br>import com.ruoyi.common.utils.ip.IpUtils;<br>import com.ruoyi.system.service.IAppUserService;<br>import org.slf4j.Logger;<br>import org.slf4j.LoggerFactory;<br>import org.springframework.stereotype.Component;</p>
+<p>import javax.annotation.Resource;</p>
+<p>/**</p>
+<ul>
+<li>登录校验方法</li>
+<li></li>
+<li>@author ruoyi</li>
+<li>/<br>@Component<br>public class AppLoginService {<br>  protected final Logger logger = LoggerFactory.getLogger(this.getClass());<br>  @Resource<br>  private AppTokenService appTokenService;<br>  @Resource<br>  private IAppUserService appUserSevice;</li>
+</ul>
+<pre><code>/**
+ * 登录验证
+ *
+ * @param username 用户名
+ * @param password 密码
+ * @return 结果
+ */
+public String login(String username, String password) {
+    AppUser appUser = appUserSevice.selectAppUserByUserName(username);
+    if (appUser == null) {
+        throw new ServiceException("用户不存在");
+    }
+    if (!appUserSevice.checkPassword(password, appUser.getSalt(), appUser.getPassword())) {
+        throw new ServiceException("密码不正确");
+    }
+    LoginAppUser loginAppUser = new LoginAppUser(appUser.getUserId(), appUser);
+    recordLoginInfo(loginAppUser.getUserId());
+    // 生成token
+    return appTokenService.createAppToken(loginAppUser);
+}
+ 
+/**
+ * 记录登录信息
+ *
+ * @param userId 用户ID
+ */
+private void recordLoginInfo(Long userId) {
+    AppUser appUser = new AppUser();
+    appUser.setUserId(userId);
+    appUser.setLoginIp(IpUtils.getIpAddr());
+    appUser.setLoginDate(DateUtils.getNowDate());
+    appUserSevice.updateAppUser(appUser);
+}
+</code></pre>
+<p>}<br>目录：ruoyi-framework——&gt;src——&gt;main——&gt;java——&gt;com.ruoyi.framework——&gt;web——&gt;service</p>
+<p>注意：与 SysLoginService 同级目录<br><img src="/../%E8%8B%A5%E4%BE%9D%E6%A1%86%E6%9E%B6%E6%96%B0%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/1712091164317.png"></p>
+<p>12、修改JwtAuthenticationTokenFilter token过滤器 验证token有效性</p>
+<p>package com.ruoyi.framework.security.filter;</p>
+<p>import java.io.IOException;<br>import java.util.Collection;<br>import javax.annotation.Resource;<br>import javax.servlet.FilterChain;<br>import javax.servlet.ServletException;<br>import javax.servlet.http.HttpServletRequest;<br>import javax.servlet.http.HttpServletResponse;</p>
+<p>import com.ruoyi.common.constant.Constants;<br>import com.ruoyi.common.core.domain.model.LoginAppUser;<br>import com.ruoyi.framework.web.service.AppTokenService;<br>import org.slf4j.Logger;<br>import org.slf4j.LoggerFactory;<br>import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;<br>import org.springframework.security.core.GrantedAuthority;<br>import org.springframework.security.core.context.SecurityContextHolder;<br>import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;<br>import org.springframework.stereotype.Component;<br>import org.springframework.web.filter.OncePerRequestFilter;<br>import com.ruoyi.common.core.domain.model.LoginUser;<br>import com.ruoyi.common.utils.SecurityUtils;<br>import com.ruoyi.common.utils.StringUtils;<br>import com.ruoyi.framework.web.service.TokenService;</p>
+<p>/**</p>
+<ul>
+<li><p>token过滤器 验证token有效性</p>
+</li>
+<li></li>
+<li><p>@author ruoyi</p>
+</li>
+<li><p>/<br>@Component<br>public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {<br>  protected final Logger logger = LoggerFactory.getLogger(this.getClass());<br>  @Resource<br>  private TokenService tokenService;</p>
+<p>  @Resource<br>  private AppTokenService appTokenService;</p>
+<p>  @Override<br>  protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)</p>
+<pre><code>      throws ServletException, IOException {
+  if (request.getRequestURI().contains(Constants.APP_URI)) {
+      logger.info("前台接口请求:{}", request.getRequestURI());
+      LoginAppUser loginAppUser = appTokenService.getLoginAppUser(request);
+      if (StringUtils.isNotNull(loginAppUser) &amp;&amp; StringUtils.isNull(SecurityUtils.getAuthentication())) {
+          appTokenService.verifyToken(loginAppUser);
+          auth(loginAppUser, loginAppUser.getAuthorities(), request);
+      }
+
+  } else {
+      logger.info("后台接口请求:{}", request.getRequestURI());
+      LoginUser loginUser = tokenService.getLoginUser(request);
+      if (StringUtils.isNotNull(loginUser) &amp;&amp; StringUtils.isNull(SecurityUtils.getAuthentication())) {
+          tokenService.verifyToken(loginUser);
+          auth(loginUser, loginUser.getAuthorities(), request);
+      }
+  }
+  chain.doFilter(request, response);
+</code></pre>
+<p>  }</p>
+<p>  /**</p>
+<ul>
+<li>验证token</li>
+<li></li>
+<li>@param obj         登录信息</li>
+<li>@param authorities 已授予的权限集合</li>
+<li>@param request     网络请求</li>
+<li>/<br>private void auth(Object obj, Collection&lt;? extends GrantedAuthority&gt; authorities, HttpServletRequest request) {<br>  UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(obj, null, authorities);<br>  authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));<br>  SecurityContextHolder.getContext().setAuthentication(authenticationToken);<br>}<br>}<br>目录：ruoyi-framework——&gt;src——&gt;main——&gt;java——&gt;com.ruoyi.framework——&gt;security——&gt;filter<br><img src="/../%E8%8B%A5%E4%BE%9D%E6%A1%86%E6%9E%B6%E6%96%B0%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/1712091186950.png"></li>
+</ul>
+</li>
+</ul>
+<p>13、安全服务工具类 SecurityUtils 添加信息</p>
+<p>添加： </p>
+<pre><code>/**
+ * 获取APP用户
+ **/
+public static LoginAppUser getLoginAppUser()
+{
+    try
+    {
+        return (LoginAppUser) getAuthentication().getPrincipal();
+    }
+    catch (Exception e)
+    {
+        throw new ServiceException("获取APP用户信息异常", HttpStatus.UNAUTHORIZED);
+    }
+}
+</code></pre>
+<p><img src="/../%E8%8B%A5%E4%BE%9D%E6%A1%86%E6%9E%B6%E6%96%B0%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/1712091210240.png"></p>
+<p>目录：ruoyi-common——&gt;src——&gt;main——&gt;java——&gt;com.ruoyi.common——&gt;utils</p>
+<p><img src="/../%E8%8B%A5%E4%BE%9D%E6%A1%86%E6%9E%B6%E6%96%B0%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/1712091223703.png"></p>
+<p>14、web层通用数据类 BaseController 添加信息</p>
+<p>添加：</p>
+<pre><code>/**
+ * 获取APP用户缓存信息
+ */
+public LoginAppUser getLoginAppUser()
+{
+    return SecurityUtils.getLoginAppUser();
+} 
+</code></pre>
+<p><img src="/../%E8%8B%A5%E4%BE%9D%E6%A1%86%E6%9E%B6%E6%96%B0%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/1712091241496.png"></p>
+<p> 目录：ruoyi-common——&gt;src——&gt;main——&gt;java——&gt;com.ruoyi.common——&gt;core——&gt;controller </p>
+<p><img src="/../%E8%8B%A5%E4%BE%9D%E6%A1%86%E6%9E%B6%E6%96%B0%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/1712091263567.png"></p>
+<p>15、创建 AppLoginController 控制器</p>
+<p>package com.ruoyi.web.controller.system;</p>
+<p>import com.ruoyi.common.constant.Constants;<br>import com.ruoyi.common.core.controller.BaseController;<br>import com.ruoyi.common.core.domain.AjaxResult;<br>import com.ruoyi.common.core.domain.entity.AppUser;<br>import com.ruoyi.common.core.domain.model.LoginAppBody;<br>import com.ruoyi.framework.web.service.AppLoginService;<br>import io.swagger.annotations.Api;<br>import io.swagger.annotations.ApiOperation;<br>import org.springframework.web.bind.annotation.*;</p>
+<p>import javax.annotation.Resource;</p>
+<p>/**</p>
+<ul>
+<li>登录验证</li>
+<li></li>
+<li>@author ruoyi</li>
+<li>/<br>@Api(“APP登录管理”)<br>@RestController<br>@RequestMapping(“/app”)<br>public class AppLoginController extends BaseController {<br>  @Resource<br>  private AppLoginService appLoginService;</li>
+</ul>
+<pre><code>@ApiOperation("登录")
+@PostMapping("/login")
+public AjaxResult login(@RequestBody LoginAppBody loginAppBody) {
+    AjaxResult ajax = AjaxResult.success();
+    // 生成令牌
+    String token = appLoginService.login(loginAppBody.getUsername(), loginAppBody.getPassword());
+    ajax.put(Constants.TOKEN, token);
+    return ajax;
+}
+ 
+@ApiOperation("根据token获取用户信息")
+@GetMapping("/userInfo")
+public AjaxResult userInfo() {
+    AppUser appUser = getLoginAppUser().getAppUser();
+    AjaxResult ajax = AjaxResult.success();
+    ajax.put("appUser", appUser);
+    return ajax;
+}
+</code></pre>
+<p>}<br>目录：ruoyi-admin——&gt;src——&gt;main——&gt;java——&gt;com.ruoyi——&gt;web——&gt;controller——&gt;system</p>
+<p>注意：与 SysUserController 同级目录<br><img src="/../%E8%8B%A5%E4%BE%9D%E6%A1%86%E6%9E%B6%E6%96%B0%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/1712091289115.png"></p>
+<p>16、SecurityConfig添加匿名访问地址</p>
+<p>添加：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">// 对于APP登录login 允许匿名访问                .antMatchers("/app/login").permitAll() <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="/../%E8%8B%A5%E4%BE%9D%E6%A1%86%E6%9E%B6%E6%96%B0%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/1712091308686.png"></p>
+<p> 目录：ruoyi-framework——&gt;src——&gt;main——&gt;java——&gt;com.ruoyi.framework——&gt;config </p>
+<p><img src="/../%E8%8B%A5%E4%BE%9D%E6%A1%86%E6%9E%B6%E6%96%B0%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/1712091319403.png"></p>
+<p>17、启动服务测试接口</p>
+<p><img src="/../%E8%8B%A5%E4%BE%9D%E6%A1%86%E6%9E%B6%E6%96%B0%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/1712091341668.png"></p>
+<p><img src="/../%E8%8B%A5%E4%BE%9D%E6%A1%86%E6%9E%B6%E6%96%B0%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/1712091364303.png"></p>
+<p><img src="/../%E8%8B%A5%E4%BE%9D%E6%A1%86%E6%9E%B6%E6%96%B0%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/1712091374905.png"></p>
+<ul>
+<li>————————————————<pre><code>                 版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。
+</code></pre>
+</li>
+</ul>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/netuser1937/article/details/134108549">https://blog.csdn.net/netuser1937/article/details/134108549</a></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">豪先生</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://haosir5.github.io/2024/04/03/ruo-yi-kuang-jia-xin-yong-hu-deng-lu/">https://haosir5.github.io/2024/04/03/ruo-yi-kuang-jia-xin-yong-hu-deng-lu/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">豪先生</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/%E6%A0%87%E7%AD%BE/RuoYi/">
+                                    <span class="chip bg-color">RuoYi</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/zfb.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: '8pLLXzvXjssGS3VbuyeiiUfw-gzGzoHsz',
+        appKey: 'nBqsQHvFbrlXnnp6z5gA2wye',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'just go go',
+        path: window.location.pathname,
+    });
+</script>
+
+<!--酷Q推送-->
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2024/04/03/ruo-yi-kuang-jia-xin-yong-hu-deng-lu/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://tvax2.sinaimg.cn/large/006D2oSpgy1h1ojlofdftj30m808cmzi.jpg" class="responsive-img" alt="若依框架新用户登录">
+                        
+                        <span class="card-title">若依框架新用户登录</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-04-03
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            豪先生
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/%E6%A0%87%E7%AD%BE/RuoYi/">
+                        <span class="chip bg-color">RuoYi</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/09/25/spring-jpa-maven-chuang-jian-xiang-mu/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://tva3.sinaimg.cn/large/006D2oSpgy1h1ojlhcdbqj318g1qetif.jpg" class="responsive-img" alt="Spring+JPA+Maven创建项目">
+                        
+                        <span class="card-title">Spring+JPA+Maven创建项目</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-09-25
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            豪先生
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/%E6%A0%87%E7%AD%BE/Java/">
+                        <span class="chip bg-color">Java</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="6954857205"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='list'
+                   preload='auto'
+                   volume='0.5'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2024</span>
+            
+            <a href="/about" target="_blank">豪先生</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">40.6k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2019";
+                        var startMonth = "6";
+                        var startDate = "28";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:1394691532@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1394691532" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1394691532" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

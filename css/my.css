@@ -1,0 +1,10 @@
+/* Here is your custom css styles. */
+/* PC端目录按钮样式 */
+.content>#floating-toc-btn{
+    position: fixed;
+    right: 15px;
+    bottom: 200px;
+    padding-top: 15px;
+    margin-bottom: 0;
+    z-index: 998;
+}
